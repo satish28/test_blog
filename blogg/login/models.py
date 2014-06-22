@@ -7,5 +7,3 @@ class MyUser(AbstractBaseUser):
 	lastname = models.CharField(max_length=50, null=False, blank=True)
 	
 	USERNAME_FIELD = 'email'
-
-# Create your models here.
