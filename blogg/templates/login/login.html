@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>login | blogg</title>
+	</head>
+	<body>
+		Login form....
+		<form action="" method="post">
+			{% csrf_token %}
+			<div id="msg" style="color:red;height:30px;padding-top:5px;">
+				{{ error }}
+			</div>
+			<table>
+				<tr>
+					<td>Username:</td>
+					<td><input type="text" name="username" autofocus></td>
+				</tr>
+			 	<tr>
+					<td>Password:</td>
+					<td><input type="password" name="password"></td>
+				</tr>
+				<tr>
+					<td><input type="submit" value="submit"></td>
+				</tr>
+			</table>
+		</form>
+		<a href="register">Register</a>
+	</body>
+</html>

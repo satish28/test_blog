@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>Register | blogg</title>
+	</head>
+	<body>
+		<h1>Register here</h1>
+		
+		<form method="post" action="register">
+			{% csrf_token %}
+			{% for field in form.visible_fields %}
+				{{ field.errors }}
+				{{ field.help_text }}
+				{{ field }}<br/>
+			{% endfor %}
+			
+			<input type="submit" value="Register" >
+		</form>
+	</body>
+</html>
