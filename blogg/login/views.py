@@ -4,7 +4,7 @@ from django.template import RequestContext
 # Create your views here.
 
 def user_login(request):
-    return HttpResponse('userlogin')
+    pass
     
 def user_register(request):
     pass
