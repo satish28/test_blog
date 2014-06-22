@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'posts',
     'login',
 )
 
@@ -67,12 +68,12 @@ WSGI_APPLICATION = 'blogg.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'django_db',
-        'USER': 'postgres',
-        'PASSWORD': 'Python07',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2', 
+        'NAME': '', 
+        'USER': '',
+        'PASSWORD': '',
+        'HOST': '',   
+        'PORT': '',            
     }
 }
 
