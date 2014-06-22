@@ -9,7 +9,7 @@ class UserPosts(models.Model):
 	first_name =  models.CharField(max_length=30)
 	last_name =  models.CharField(max_length=30)	
 	post_title = models.CharField(max_length=30)	
-	post_content = models.CharField(max_length=1000)	
+	post_content = models.TextField()	
 	likes = models.IntegerField(default=0)
 	visits = models.IntegerField(default=0)
 	created_timestamp = models.DateTimeField()
