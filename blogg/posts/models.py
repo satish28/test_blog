@@ -1,11 +1,11 @@
 from django.db import models
-from login.models import MyUser
+from login.models import User
 
 # Create your models here.
 
 	
 class UserPosts(models.Model):
-	email = models.ForeignKey(MyUser)
+	email = models.ForeignKey(User)
 	first_name =  models.CharField(max_length=30)
 	last_name =  models.CharField(max_length=30)	
 	post_title = models.CharField(max_length=30)	
