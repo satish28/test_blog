@@ -1,0 +1,35 @@
+body {
+  padding: 0px;
+  margin: 0px;
+  border: 0px;
+  background-color: #eee;
+}
+
+.navbar{
+	text-align: center;
+	background-color: black;
+	color: white;
+	border-radius: 0px;
+}
+
+.navbar a{
+	text-decoration: none;
+}
+
+.user-info {
+	position: absolute;
+	right: 10px;
+	top: 70px;
+}
+
+/* styling for home */
+
+.info {
+	text-align: right;
+}
+
+.likes .visits {
+	
+	border-style: solid;
+	border-radius: 3px;
+}
