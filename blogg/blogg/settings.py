@@ -17,7 +17,6 @@ PROJECT_PATH = os.path.join(SETTINGS_DIR, os.pardir)
 PROJECT_PATH = os.path.abspath(PROJECT_PATH)
 TEMPLATE_PATH = os.path.join(PROJECT_PATH, 'templates')
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
 
@@ -41,6 +40,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'widget_tweaks',
     'posts',
     'login',
 )
@@ -69,9 +69,9 @@ WSGI_APPLICATION = 'blogg.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2', 
-        'NAME': '', 
-        'USER': '',
-        'PASSWORD': '',
+        'NAME': 'django_db', 
+        'USER': 'postgres',
+        'PASSWORD': 'Python07',
         'HOST': 'localhost',   
         'PORT': '5432',            
     }
@@ -93,5 +93,5 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
-
+STATICFILES_DIRS = (os.path.join(PROJECT_PATH, "static"),)
 STATIC_URL = '/static/'

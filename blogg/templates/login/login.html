@@ -1,30 +1,26 @@
 <!DOCTYPE html>
-
+{% load static %}
 <html>
 	<head>
+		<link href="{% static 'login/css/bootstrap.min.css' %}" rel="stylesheet">
+		<link href="{% static 'login/css/login.css' %}" rel="stylesheet">		
 		<title>login | blogg</title>
 	</head>
 	<body>
-		Login form....
-		<form action="" method="post">
-			{% csrf_token %}
-			<div id="msg" style="color:red;height:30px;padding-top:5px;">
-				{{ error }}
-			</div>
-			<table>
-				<tr>
-					<td>Username:</td>
-					<td><input type="text" name="username" autofocus></td>
-				</tr>
-			 	<tr>
-					<td>Password:</td>
-					<td><input type="password" name="password"></td>
-				</tr>
-				<tr>
-					<td><input type="submit" value="submit"></td>
-				</tr>
-			</table>
-		</form>
-		<a href="{% url 'register' %}">Register</a>
+		<div class="container">
+		    <form class="form-signin" id="login_form" action="{% url 'login' %}" method="post">
+			    {% csrf_token %}
+				<h2>Please sign in</h2>
+			    <div id="msg" style="color:red;height:30px;padding-top:5px;">
+				    {{ error }}
+			    </div>
+			    Username: <input type="text" class="form-control" placeholder="Username" name="username" autofocus required><br/>
+                Password: <input type="password" class="form-control" placeholder="Password" name="password" required><br/>
+			    <button class="btn btn-lg btn-block btn-primary" type="submit" value="submit">Sign in</button>
+				<a class="btn btn-lg btn-block btn-primary" href="{% url 'register' %}">Register</a>
+		    </form>
+	    </div>
+		<script src="{% static 'login/js/jquery-2.1.1.js' %}"></script>
+		<script src="{% static 'login/js/bootstrap.min.js' %}"></script>
 	</body>
 </html>

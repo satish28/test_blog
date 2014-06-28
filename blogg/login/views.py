@@ -24,7 +24,7 @@ def user_login(request):
                 login(request, user)
                 print 'valid user'
                 # Specify the url for home page
-                return HttpResponse('User authenticated successfully')
+                return HttpResponse('User %s authenticated successfully <a href="logout">Logout</a>' % user.get_short_name())
             else:
                 print 'user is inactive'
                 error = 'user inactive'
@@ -52,6 +52,5 @@ def user_register(request):
     # Specify the url for register page
     return render_to_response('login/register.html', context_dict, context)
     
-@login_required
 def user_logout(request):
     return logout_then_login(request, reverse('login'))
