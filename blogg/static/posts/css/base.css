@@ -28,8 +28,24 @@ body {
 	text-align: right;
 }
 
-.likes .visits {
-	
-	border-style: solid;
-	border-radius: 3px;
+.content {
+	float: left;
+	width: 75%;
+}
+
+/* styling for user-pane */
+
+.user-pane {
+	float: right;
+	width: 25%;
+	height: 100%;
+}
+
+.user-action {
+	margin-top: 45%;
+	margin-left: 50%;
+}
+
+.user-action a {
+	padding-bottom: 10px;
 }

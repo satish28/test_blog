@@ -18,7 +18,17 @@
 		    {% endif %}
 		</div>
 		<div class="container">
-			{% block body_block %}{% endblock %}
+			<div class="content">
+			    {% block body_block %}{% endblock %}
+		    </div>
+			<div class="user-pane">
+				<div class="user-action">
+				    {% if user.is_authenticated %}
+				        <a href="">New Post</a><br/>
+					    <a href="">My Profile</a>
+				    {% endif %}
+			    </div>
+			<div>
 		</div>
 	<script src="{% static 'common/js/jquery-2.1.1.js' %}"></script>
 	<script src="{% static 'common/js/bootstrap.min.js' %}"></script>
