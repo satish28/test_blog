@@ -4,6 +4,7 @@ from django.template import RequestContext
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from models import UserPosts
+from forms import UserPostForm
 
 def home(request):
     context = RequestContext(request)
@@ -23,3 +24,25 @@ def each_post(request, post_id):
         return render_to_response('common/error.html', error, context)
     context_dict['post'] = post
     return render_to_response('posts/post.html', context_dict, context)
+
+def add_post(request):
+	if request.user.is_authenticated():
+		context = RequestContext(request)
+		current_user = request.user
+		if request.method == 'POST':
+			form = UserPostForm(request.POST)
+			#form.username_id = current_user.id
+			if form.is_valid():
+				p1 = form.save(commit=False)
+				p1.username_id = current_user.id
+				p1.save()							
+				return HttpResponseRedirect(reverse('home'))
+			else:
+				print form.errors
+		else:
+			form = UserPostForm()
+		return render_to_response('posts/add_post.html',{'form':form},context)
+	else:
+		return HttpResponse("User is not authenticated")
+
+
