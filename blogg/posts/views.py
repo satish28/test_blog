@@ -60,6 +60,3 @@ def user_profile(request):
 	else:
 		error = "Please login"
 		return render_to_response('common/error.html', {'error':error}, context)
-
-
-

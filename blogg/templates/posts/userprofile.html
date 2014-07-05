@@ -4,17 +4,16 @@
 
 {% block body_block %}
 	<h3>{{user}}</h3>
-	{%if user %}
+	{% if user %}
 	<ul>
-		{%if post%}
-			{%for post in post %}
-			<h4><a href="/post/{{ post.id }}">{{ post.post_title }}</a></h4>
-			{%endfor%}
-		
+		{% if post %}
+			{% for post in post %}
+			<h4><a href="{% url 'posts.views.each_post' post_id=post.id%}">{{ post.post_title }}</a></h4>
+			{% endfor %}
 		{% else %}
 			<i> no posts available for the user </i>	
-		{%endif%}
-	{%else%}
+		{% endif %}
+	{% else %}
 		<i> Author is not available </i>
-	{%endif%}
+	{% endif %}
 {% endblock %}	

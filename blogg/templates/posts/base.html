@@ -24,8 +24,8 @@
 			<div class="user-pane">
 				<div class="user-action">
 				    {% if user.is_authenticated %}
-				        <a href="/posts/add_post/">New Post</a><br/>
-					    <a href="/posts/userprofile/">My Profile</a>
+				        <a href="{% url 'add_post' %}">New Post</a><br/>
+					    <a href="{% url 'user_profile' %}">My Profile</a>
 				    {% endif %}
 			    </div>
 			<div>
