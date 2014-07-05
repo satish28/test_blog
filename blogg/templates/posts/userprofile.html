@@ -6,13 +6,9 @@
 	<h3>{{ user }}</h3>
 	{% if user %}
 	<ul>
-		{% if post %}
-			{% for post in post %}
+		{% for post in posts %}
 			<h4><a href="{% url 'post' post.id %}">{{ post.post_title }}</a></h4>
-			{% endfor %}
-		{% else %}
-			<i> no posts available for the user </i>	
-		{% endif %}
+		{% endfor %}
 	{% else %}
 		<i> Author is not available </i>
 	{% endif %}

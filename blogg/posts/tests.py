@@ -9,3 +9,13 @@ class PostsTest(TestCase):
         
     def test_each_post(self):
         pass
+        
+    # Testing services
+    def test_get_home_posts(self):
+        pass
+        
+    def test_get_post(self):
+        pass
+        
+    def test_get_user_profile(self):
+        pass

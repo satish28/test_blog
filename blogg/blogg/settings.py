@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'widget_tweaks',
+    'south',
     'posts',
     'login',
 )
@@ -71,7 +72,7 @@ DATABASES = {
         'NAME': '', 
         'USER': '',
         'PASSWORD': '',
-        'HOST': '', 
+        'HOST': 'localhost', 
         'PORT': '',          
     }
 }
@@ -94,3 +95,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 STATICFILES_DIRS = (os.path.join(PROJECT_PATH, "static"),)
 STATIC_URL = '/static/'
+
+# Login url
+LOGIN_URL = '/login'
