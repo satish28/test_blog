@@ -1,6 +1,7 @@
 {% extends 'posts/base.html' %}
 
-{% block title %} Blogs {% endblock %}
+{% block title %} New Post {% endblock %}
+
 {% block body_block %}
 		<h2> Post a Blog </h2>
 		<form id="post_form" method="post" action="{% url 'add_post' %}">

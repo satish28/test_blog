@@ -65,18 +65,17 @@ WSGI_APPLICATION = 'blogg.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2', 
-        'NAME': 'mydb', 
-        'USER': 'satish',
-        'PASSWORD': 'satish28',
-        'HOST': 'localhost', 
+        'NAME': '', 
+        'USER': '',
+        'PASSWORD': '',
+        'HOST': '', 
         'PORT': '',          
     }
 }
-
+ 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 
