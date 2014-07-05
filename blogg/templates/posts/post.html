@@ -3,10 +3,10 @@
 {% block title %} home {% endblock %}
 
 {% block body_block %}
-	<h4>{{ post.post_title }}</h4>
+	<h4>{{post.post_title }}</h4>
 	{{ post.post_content }} <br/>
 	<div class="info">
-		- {{ post.first_name }} <span class="likes">Likes:{{ post.likes }}</span> <span class="visits">Visits:{{ post.visits }}</span>
+		- {{ post.username }} <span class="likes">Likes:{{ post.likes }}</span> <span class="visits">Visits:{{ post.visits }}</span>
 	</div>
-	<hr/>
+	<br/>
 {% endblock %}
