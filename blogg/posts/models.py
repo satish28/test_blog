@@ -12,3 +12,4 @@ class UserPosts(models.Model):
     likes = models.IntegerField(default=0)
     visits = models.IntegerField(default=0)
     created_timestamp = models.DateTimeField(auto_now_add=True)
+    is_deleted = models.BooleanField(default=False)
