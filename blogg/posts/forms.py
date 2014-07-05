@@ -11,4 +11,4 @@ class UserPostForm(forms.ModelForm):
 	class Meta:
 		model = UserPosts
 		fields=('username','post_title','post_content','likes','visits','created_timestamp')
-		exclude=('username')
+		exclude=('username',)

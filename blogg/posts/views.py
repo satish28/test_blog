@@ -21,7 +21,7 @@ def each_post(request, post_id):
     post = UserPosts.objects.get(id=post_id)
     if post is None:
         error = 'Page not found'
-        return render_to_response('common/error.html', error, context)
+        return render_to_response('common/error.html', {'error':error}, context)
     context_dict['post'] = post
     return render_to_response('posts/post.html', context_dict, context)
 
@@ -31,7 +31,6 @@ def add_post(request):
 		current_user = request.user
 		if request.method == 'POST':
 			form = UserPostForm(request.POST)
-			#form.username_id = current_user.id
 			if form.is_valid():
 				p1 = form.save(commit=False)
 				p1.username_id = current_user.id
@@ -44,5 +43,24 @@ def add_post(request):
 		return render_to_response('posts/add_post.html',{'form':form},context)
 	else:
 		return HttpResponse("User is not authenticated")
+
+def user_profile(request):
+	if request.user.is_authenticated():
+		current_user = request.user
+		context = RequestContext(request)
+		context_dict = {}
+		post = UserPosts.objects.filter(username_id=current_user.id)
+		if post:
+			context_dict['post'] = post
+			context_dict['user'] = current_user
+			return render_to_response('posts/userprofile.html', context_dict, context)
+		else:
+			error = "No posts avaliable for the user "
+			return render_to_response('common/error.html', {'error':error}, context)
+	else:
+		context = RequestContext(request)
+		error = "Please login"
+		return render_to_response('common/error.html', {'error':error}, context)
+
 
 
