@@ -45,9 +45,9 @@ def add_post(request):
 		return HttpResponse("User is not authenticated")
 
 def user_profile(request):
+	context = RequestContext(request)
 	if request.user.is_authenticated():
 		current_user = request.user
-		context = RequestContext(request)
 		context_dict = {}
 		post = UserPosts.objects.filter(username_id=current_user.id)
 		if post:
@@ -58,7 +58,6 @@ def user_profile(request):
 			error = "No posts avaliable for the user "
 			return render_to_response('common/error.html', {'error':error}, context)
 	else:
-		context = RequestContext(request)
 		error = "Please login"
 		return render_to_response('common/error.html', {'error':error}, context)
 
