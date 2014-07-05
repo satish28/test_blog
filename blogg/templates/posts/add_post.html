@@ -9,10 +9,10 @@
 		<table>
 			<td>
 			{% csrf_token %}
-			{%for hidden in form.hidden_fields%}
+			{% for hidden in form.hidden_fields% }
 				{{hidden}}
-			{%endfor%}
-			{%for field in form.visible_fields%}
+			{% endfor% }
+			{% for field in form.visible_fields %}
 				{{field.errors}}
 				<tr>{{field.help_text}}</tr>
 				{{field}}
