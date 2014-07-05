@@ -8,7 +8,7 @@
 	<ul>
 		{% if post %}
 			{% for post in post %}
-			<h4><a href="{% url 'posts.views.each_post' post_id=post.id%}">{{ post.post_title }}</a></h4>
+			<h4><a href="{% url 'post' post.id %}">{{ post.post_title }}</a></h4>
 			{% endfor %}
 		{% else %}
 			<i> no posts available for the user </i>	
