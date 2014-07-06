@@ -80,3 +80,12 @@ def user_profile(request):
         context_dict['posts'] = posts
         context_dict['error'] = error
         return render_to_response('posts/userprofile.html', context_dict, context)
+
+@login_required
+def post_like(request):
+    context = RequestContext(request)
+    post_id = None
+    if request.method == 'GET':
+        post_id = request.GET['post_id']
+        likes = update_likes(post_id)
+    return HttpResponse(likes)

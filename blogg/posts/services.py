@@ -60,6 +60,17 @@ def shorten_content(post_content):
         content += '...'
     return content
     
+def update_likes(post_id):
+    """
+    Update likes for post and return the updated like count.
+    """
+    post = get_post(post_id)
+    if post:
+        post.likes += 1
+        likes = post.likes
+        post.save()
+    return likes
+    
 class PostWithImage():
     """
     Object with post and email. This is primarily done to get email hash.

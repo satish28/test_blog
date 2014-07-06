@@ -10,5 +10,11 @@
 		    - {{ post.username }} <span class="likes">Likes:{{ post.likes }}</span> <span class="visits">Visits:{{ post.visits }}</span>
 	    </div>
 	    <br/>
+		<div class="like">
+			<button class="btn btn-mini like-btn" type="button">Like</button>
+		</div>
+		<script>
+			var post_id = "{{ post.id }}";
+		</script>
 	{% endif %}
 {% endblock %}

@@ -35,3 +35,6 @@ class PostsTest(TestCase):
         
     def test_shorten_content(self):
         pass
+        
+    def update_likes(self):
+        pass
