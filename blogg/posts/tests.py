@@ -19,3 +19,6 @@ class PostsTest(TestCase):
         
     def test_get_user_profile(self):
         pass
+        
+    def test_generate_gravatar_url(self):
+        pass

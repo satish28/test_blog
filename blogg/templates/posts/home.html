@@ -5,11 +5,11 @@
 {% block body_block %}
     <h2>Popular Posts</h2>
 	<hr/>
-	{% for post in posts %}
-		<h4><a href="{% url 'post' post.id %}">{{ post.post_title }}</a></h4>
-		{{ post.post_content }} <br/>
+	{% for post_image in posts_images %}
+		<h4><a href="{% url 'post' post_image.post.id %}">{{ post_image.post.post_title }}</a></h4>
+		{{ post_image.post.post_content }} <br/>
 		<div class="info">
-			- {{ post.username }} <span class="likes">Likes:{{ post.likes }}</span> <span class="visits">Visits:{{ post.visits }}</span>
+			<span class="user_image_home"><img src="{{ post_image.gravatar_url }}"></span>  {{ post_image.post.username }} <span class="likes">Likes:{{ post_image.post.likes }}</span> <span class="visits">Visits:{{ post_image.post.visits }}</span>
 		</div>
 		<hr/>
 	{% endfor %}

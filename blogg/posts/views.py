@@ -3,7 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.template import RequestContext
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
-from services import get_home_posts, get_post, get_user_posts
+from services import get_home_posts, get_post, get_user_posts, generate_gravatar_url, PostWithImage
 from forms import UserPostForm
 
 def home(request):
@@ -14,7 +14,12 @@ def home(request):
     user = request.user
     context_dict = {}
     posts = get_home_posts()
-    context_dict['posts'] = posts
+    posts_with_images = []
+    image_size = 30
+    for post in posts:
+        post_with_image = PostWithImage(post, post.username.email, image_size)
+        posts_with_images.append(post_with_image)
+    context_dict['posts_images'] = posts_with_images
     context_dict['user'] = user
     return render_to_response('posts/home.html', context_dict, context)
     
@@ -60,10 +65,17 @@ def user_profile(request):
     current_user = request.user
     context_dict = {}
     posts = get_user_posts(current_user.id)
+    # Generating url for getting gravatar image.
+    email = current_user.email
+    image_size = 80
+    gravatar_url = generate_gravatar_url(email, image_size)
+    context_dict['gravatar_url'] = gravatar_url
+    context_dict['user'] = current_user
     if posts:
         context_dict['posts'] = posts
-        context_dict['user'] = current_user
         return render_to_response('posts/userprofile.html', context_dict, context)
     else:
         error = "No posts avaliable for the user "
-        return render_to_response('common/error.html', {'error':error}, context)
+        context_dict['posts'] = posts
+        context_dict['error'] = error
+        return render_to_response('posts/userprofile.html', context_dict, context)

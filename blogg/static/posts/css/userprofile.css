@@ -1,0 +1,7 @@
+#user_image img {
+	-moz-border-radius: 52px;
+	-webkit-border-radius: 52px;
+	border-radius: 52px;
+	width: 80px;
+	height: 80px;
+}
