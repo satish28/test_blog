@@ -3,7 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.template import RequestContext
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
-from services import get_home_posts, get_post, get_user_posts, generate_gravatar_url, PostWithImage
+from services import *
 from forms import UserPostForm
 
 def home(request):
@@ -33,6 +33,7 @@ def each_post(request, post_id):
     if post is None:
         error = 'Page not found'
         return render_to_response('common/error.html', {'error':error}, context)
+    increment_visit_count(post.id)
     context_dict['post'] = post
     return render_to_response('posts/post.html', context_dict, context)
 

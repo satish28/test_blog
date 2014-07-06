@@ -37,6 +37,17 @@ def generate_gravatar_url(email, size):
     gravatar_url += urllib.urlencode({'d':default_image_url, 's':str(size)})
     return gravatar_url
     
+def increment_visit_count(post_id):
+    """
+    Increment the visit count of the post. We can directly use the post
+    object for incrementing. But it will show visit count at first visit 
+    itself. We want the visits to be incremented only after the post is
+    read. So the visit will be reflected the next time the post is opened.
+    """
+    post = get_post(post_id)
+    post.visits += 1
+    post.save()
+    
 class PostWithImage():
     """
     Object with post and email. This is primarily done to get email hash.
