@@ -48,15 +48,29 @@ def increment_visit_count(post_id):
     post.visits += 1
     post.save()
     
+def shorten_content(post_content):
+    """
+    Shorten content to be displayed in home page.
+    """
+    no_of_words = 20
+    words = post_content.split(' ')
+    reduced_words = words[:no_of_words]
+    content = ' '.join(reduced_words)
+    if len(words) > no_of_words:
+        content += '...'
+    return content
+    
 class PostWithImage():
     """
     Object with post and email. This is primarily done to get email hash.
+    This object will be used in home page.
     """
     def __init__(self, post, email, size):
         self.post = post
         self.email = email
         self.size = size
         self.gravatar_url = generate_gravatar_url(self.email, self.size)
+        self.post.post_content = shorten_content(post.post_content)
         
     def __str__(self):
         return str(self.post) + self.gravatar_url + self.size
