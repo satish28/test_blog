@@ -2,6 +2,7 @@ from django.shortcuts import render_to_response
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import RequestContext
 from django.core.urlresolvers import reverse
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
 from services import *
 from forms import UserPostForm
@@ -13,14 +14,23 @@ def home(request):
     context = RequestContext(request)
     user = request.user
     context_dict = {}
-    posts = get_home_posts()
+    posts = get_home_posts() #posts = UserPosts.objects.all()
     posts_with_images = []
     image_size = 30
     for post in posts:
         post_with_image = PostWithImage(post, post.username.email, image_size)
         posts_with_images.append(post_with_image)
+    pages = Paginator(posts_with_images,5)
+    page = request.GET.get('page')
+    try:
+	posts_pages = pages.page(page)
+    except PageNotAnInteger:
+	posts_pages = pages.page(1)
+    except EmptyPage:
+	posts_pages = pages.page(paginator.num_pages)
     context_dict['posts_images'] = posts_with_images
     context_dict['user'] = user
+    context_dict['posts_pages'] = posts_pages
     return render_to_response('posts/home.html', context_dict, context)
     
 def each_post(request, post_id):
