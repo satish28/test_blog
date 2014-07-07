@@ -27,7 +27,7 @@
 				<div class="user-action">
 				    {% if user.is_authenticated %}
 				        <a href="{% url 'add_post' %}">New Post</a><br/>
-					    <a href="{% url 'user_profile' %}">My Profile</a>
+					    <a href="{% url 'user_profile' user %}">My Profile</a>
 				    {% endif %}
 			    </div>
 			<div>

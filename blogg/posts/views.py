@@ -58,7 +58,7 @@ def add_post(request):
         return render_to_response('posts/add_post.html', {'form':form}, context)
 
 @login_required
-def user_profile(request):
+def user_profile(request,user):
     """
     User profile page.
     """
