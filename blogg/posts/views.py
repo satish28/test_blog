@@ -4,6 +4,7 @@ from django.template import RequestContext
 from django.core.urlresolvers import reverse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from services import *
 from forms import UserPostForm
 
@@ -68,25 +69,26 @@ def add_post(request):
         return render_to_response('posts/add_post.html', {'form':form}, context)
 
 @login_required
-def user_profile(request,user):
-    """
-    User profile page.
-    """
+def profiles(request,author):
     context = RequestContext(request)
-    current_user = request.user
     context_dict = {}
-    posts = get_user_posts(current_user.id)
+    user = request.user
+    user_id = User.objects.get(username=author)
+    posts = get_user_posts(user_id)
     # Generating url for getting gravatar image.
-    email = current_user.email
+    email = user_id.email
     image_size = 80
     gravatar_url = generate_gravatar_url(email, image_size)
     context_dict['gravatar_url'] = gravatar_url
-    context_dict['user'] = current_user
     if posts:
-        context_dict['posts'] = posts
-        return render_to_response('posts/userprofile.html', context_dict, context)
+	context_dict['posts'] = posts
+    if user == author:
+	context_dict['user'] = user
+	return render_to_response('posts/userprofile.html', context_dict, context)
+    elif user != author:
+        context_dict['user_profile'] = author
+        return render_to_response('posts/profiles.html', context_dict, context)        
     else:
-        error = "No posts avaliable for the user "
-        context_dict['posts'] = posts
-        context_dict['error'] = error
-        return render_to_response('posts/userprofile.html', context_dict, context)
+       	error = "No posts avaliable for the user "
+	context_dict['error'] = error
+        return render_to_response('posts/profiles.html', context_dict, context)

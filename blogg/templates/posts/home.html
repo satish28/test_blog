@@ -9,7 +9,7 @@
 		<h4><a href="{% url 'post' post_image.post.id %}">{{ post_image.post.post_title }}</a></h4>
 		{{ post_image.post.post_content }} <br/>
 		<div class="info">
-			<span class="user_image_home"><img src="{{ post_image.gravatar_url }}"></span>  {{ post_image.post.username }} <span class="likes">Likes:{{ post_image.post.likes }}</span> <span class="visits">Visits:{{ post_image.post.visits }}</span>
+			<span class="user_image_home"><img src="{{ post_image.gravatar_url }}"></span><a href="{% url 'profiles' post_image.post.username %}">{{ post_image.post.username }}</a> <span class="likes">Likes:{{ post_image.post.likes }}</span> <span class="visits">Visits:{{ post_image.post.visits }}</span>
 		</div>
 		<hr/>
 	{% endfor %}
@@ -24,6 +24,4 @@
         {% if posts_pages.has_next %}
             <a href="?page={{ posts_pages.next_page_number }}">next</a>
         {% endif %}
-
-
 {% endblock %}
