@@ -15,7 +15,7 @@ def home(request):
     context = RequestContext(request)
     user = request.user
     context_dict = {}
-    posts = get_home_posts() #posts = UserPosts.objects.all()
+    posts = get_home_posts()
     posts_with_images = []
     image_size = 30
     for post in posts:
@@ -71,9 +71,14 @@ def add_post(request):
 def profiles(request,author):
     context = RequestContext(request)
     context_dict = {}
-    user = request.user
-    user_id = User.objects.get(username=author)
-    posts = get_user_posts(user_id)
+    current_user = request.user
+    error = "No posts avaliable for the user "
+    try:
+	user_id = User.objects.get(username=author)
+    	posts = get_user_posts(user_id)
+    except:
+	context_dict['error'] = error
+	return render_to_response('posts/profiles.html', context_dict, context)
     # Generating url for getting gravatar image.
     email = user_id.email
     image_size = 80
@@ -81,13 +86,18 @@ def profiles(request,author):
     context_dict['gravatar_url'] = gravatar_url
     if posts:
 	context_dict['posts'] = posts
-    if user == author:
-	context_dict['user'] = user
+    else:
+       	context_dict['error'] = error
+    if str(current_user) == str(author):
+	context_dict['user'] = current_user
 	return render_to_response('posts/userprofile.html', context_dict, context)
-    elif user != author:
+    elif str(current_user) != str(author):
         context_dict['user_profile'] = author
         return render_to_response('posts/profiles.html', context_dict, context)        
     else:
-       	error = "No posts avaliable for the user "
-	context_dict['error'] = error
+       	context_dict['error'] = error
         return render_to_response('posts/profiles.html', context_dict, context)
+@login_required
+def delete(request,post_id):
+    delete_post(post_id)
+    return HttpResponseRedirect(reverse('home'))

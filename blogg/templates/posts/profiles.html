@@ -4,10 +4,12 @@
 
 {% block body_block %}
 	<h3>{{ user_profile }}</h3>
-	<div id="user_image">
+        {% if user_profile %}
+		<div id="user_image">
 		<img src="{{ gravatar_url }}">
 	</div>
 	<br/>
+	{% endif %}
 	{% if not posts %}
 		{{ error }}
 	{% else %}
