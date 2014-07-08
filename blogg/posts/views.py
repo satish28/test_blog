@@ -40,7 +40,7 @@ def each_post(request, post_id):
     """
     context = RequestContext(request)
     context_dict = {}
-    post = get_post(post_id) # UserPosts.objects.get(id=post_id)
+    post = get_post(post_id)
     if post is None:
         error = 'Page not found'
         return render_to_response('common/error.html', {'error':error}, context)
