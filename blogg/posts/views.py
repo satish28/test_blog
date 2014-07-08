@@ -15,7 +15,7 @@ def home(request):
     context = RequestContext(request)
     user = request.user
     context_dict = {}
-    posts = get_home_posts() #posts = UserPosts.objects.all()
+    posts = get_home_posts()
     posts_with_images = []
     image_size = 30
     for post in posts:
