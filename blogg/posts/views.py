@@ -68,7 +68,6 @@ def add_post(request):
         form = UserPostForm()
         return render_to_response('posts/add_post.html', {'form':form}, context)
 
-@login_required
 def profiles(request,author):
     context = RequestContext(request)
     context_dict = {}
