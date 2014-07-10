@@ -1,6 +1,6 @@
 import hashlib
 import urllib
-from models import UserPosts
+from models import UserPosts, UserLikes
 
 def get_home_posts():
     """
@@ -60,12 +60,31 @@ def shorten_content(post_content):
         content += '...'
     return content
     
-def update_likes(post_id):
+def update_user_like(user, post):
+    """
+    Update user like in UserLikes table.
+    """
+    user_like = UserLikes(username=user, post=post)
+    user_like.save()
+    
+def is_post_liked(user, post):
+    """
+    Check if the post is already liked by the user and return True 
+    if yes, else return False.
+    """
+    try:
+        UserLikes.objects.get(username=user, post=post)
+    except UserLikes.DoesNotExist:
+        return False
+    return True
+    
+def update_likes(user, post_id):
     """
     Update likes for post and return the updated like count.
     """
     post = get_post(post_id)
-    if post:
+    if post and not is_post_liked(user, post):
+        update_user_like(user, post)
         post.likes += 1
         likes = post.likes
         post.save()

@@ -13,3 +13,13 @@ class UserPosts(models.Model):
     visits = models.IntegerField(default=0)
     created_timestamp = models.DateTimeField(auto_now_add=True)
     is_deleted = models.BooleanField(default=False)
+    
+class UserLikes(models.Model):
+    """
+    User likes model
+    """
+    username = models.ForeignKey(User)
+    post = models.ForeignKey(UserPosts)
+    
+    class Meta:
+        unique_together = (('username', 'post'),)

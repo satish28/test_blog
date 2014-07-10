@@ -28,12 +28,14 @@ def each_post(request, post_id):
     View for post page.
     """
     context = RequestContext(request)
+    user = request.user
     context_dict = {}
     post = get_post(post_id) # UserPosts.objects.get(id=post_id)
     if post is None:
         error = 'Page not found'
         return render_to_response('common/error.html', {'error':error}, context)
     increment_visit_count(post.id)
+    context_dict['is_post_liked'] = is_post_liked(user, post)
     context_dict['post'] = post
     return render_to_response('posts/post.html', context_dict, context)
 
@@ -84,8 +86,9 @@ def user_profile(request):
 @login_required
 def post_like(request):
     context = RequestContext(request)
+    user = request.user
     post_id = None
     if request.method == 'GET':
         post_id = request.GET['post_id']
-        likes = update_likes(post_id)
+        likes = update_likes(user, post_id)
     return HttpResponse(likes)
