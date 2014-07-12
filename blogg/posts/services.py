@@ -59,6 +59,12 @@ def shorten_content(post_content):
     if len(words) > no_of_words:
         content += '...'
     return content
+
+def delete_post(post_id):
+    """
+    Delete Post.
+    """
+    UserPosts.objects.filter(id=post_id).delete() 	
     
 def update_user_like(user, post):
     """

@@ -1,0 +1,20 @@
+{% extends 'posts/base.html' %}
+
+{% block title %} UserProfile {% endblock %}
+
+{% block body_block %}
+	<h3>{{ user_profile }}</h3>
+        {% if user_profile %}
+		<div id="user_image">
+		<img src="{{ gravatar_url }}">
+	</div>
+	<br/>
+	{% endif %}
+	{% if not posts %}
+		{{ error }}
+	{% else %}
+		{% for post in posts %}
+			<h4><a href="{% url 'post' post.id %}">{{ post.post_title }}</a></h4>
+		{% endfor %}
+	{% endif %}
+{% endblock %}	
