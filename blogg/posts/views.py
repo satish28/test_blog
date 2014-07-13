@@ -28,7 +28,7 @@ def home(request):
     except PageNotAnInteger:
 	    posts_pages = pages.page(1)
     except EmptyPage:
-	    posts_pages = pages.page(paginator.num_pages)
+	    posts_pages = pages.page(Paginator.num_pages)
     context_dict['posts_images'] = posts_with_images
     context_dict['user'] = user
     context_dict['posts_pages'] = posts_pages
@@ -46,7 +46,12 @@ def each_post(request, post_id):
         error = 'Page not found'
         return render_to_response('common/error.html', {'error':error}, context)
     increment_visit_count(post.id)
-    context_dict['is_post_liked'] = is_post_liked(user, post)
+    if str(user) == 'AnonymousUser':
+        # Making is_post_liked true so that guest user cannot like a post. 
+        # This is a simple hack.
+        context_dict['is_post_liked'] = True
+    else:
+        context_dict['is_post_liked'] = is_post_liked(user, post)
     context_dict['post'] = post
     return render_to_response('posts/post.html', context_dict, context)
 
@@ -70,40 +75,36 @@ def add_post(request):
         form = UserPostForm()
         return render_to_response('posts/add_post.html', {'form':form}, context)
 
-def profiles(request,author):
+def profiles(request, author):
     context = RequestContext(request)
     context_dict = {}
+    context_dict['name'] = author
     current_user = request.user
-    error = "No posts avaliable for the user "
+    error = "No posts avaliable for the user"
     try:
-	    user_id = User.objects.get(username=author)
-    	posts = get_user_posts(user_id)
-    except:
-	    context_dict['error'] = error
-	    return render_to_response('posts/profiles.html', context_dict, context)
+        user_id = User.objects.get(username=author)
+        posts = get_user_posts(user_id)
+        context_dict['posts'] = posts
+    except Exception as e:
+        context_dict['error'] = error
+        return render_to_response('posts/profile.html', context_dict, context)
     # Generating url for getting gravatar image.
     email = user_id.email
     image_size = 80
     gravatar_url = generate_gravatar_url(email, image_size)
     context_dict['gravatar_url'] = gravatar_url
-    if posts:
-	    context_dict['posts'] = posts
-    else:
-       	context_dict['error'] = error
-    if str(current_user) == str(author):
-	    context_dict['user'] = current_user
-	    return render_to_response('posts/userprofile.html', context_dict, context)
-    elif str(current_user) != str(author):
-        context_dict['user_profile'] = author
-        return render_to_response('posts/profiles.html', context_dict, context)        
-    else:
-        context_dict['error'] = error
-        return render_to_response('posts/profiles.html', context_dict, context)
+    is_user_author = False
+    if current_user.username == author:
+        is_user_author = True
+    context_dict['is_user_author'] = is_user_author
+    return render_to_response('posts/profile.html', context_dict, context)
         
 @login_required
-def delete(request,post_id):
+def delete(request, post_id):
+    user = request.user
+    author = user.username
     delete_post(post_id)
-    return HttpResponseRedirect(reverse('home'))
+    return HttpResponseRedirect(reverse('profile', kwargs={'author':author}))
 
 @login_required
 def post_like(request):

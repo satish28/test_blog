@@ -3,19 +3,18 @@
 {% block title %} UserProfile {% endblock %}
 
 {% block body_block %}
-	<h3>{{ user }}</h3>
-	{% if user_profile %}
+	<h3>{{ name }}</h3>
 	<div id="user_image">
 		<img src="{{ gravatar_url }}">
 	</div>
 	<br/>
-	{% endif %}
 	{% if user %}
-		{% if not posts %}
-			{{ error }}
-		{% endif %}
+		{{ error }}
 		{% for post in posts %}
-			<h4><a href="{% url 'post' post.id %}">{{ post.post_title }}</a></h4> <h6><a href="">edit</a> <a href="{% url 'delete' post.id %}">delete</a>
+			<h4><a href="{% url 'post' post.id %}">{{ post.post_title }}</a></h4> 
+			{% if is_user_author %}
+			    <a href="">edit</a> <a href="{% url 'delete' post.id %}">delete</a>
+			{% endif %}
 		{% endfor %}
 	{% else %}
 		<i> Author is not available </i>

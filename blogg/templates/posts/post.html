@@ -1,5 +1,5 @@
 {% extends 'posts/base.html' %}
-
+{% load static %}
 {% block title %} Post {% endblock %}
 
 {% block body_block %}
@@ -19,5 +19,6 @@
 			var user = "{{ user.username }}"
 			var post_author = "{{ post.username }}"
 		</script>
+		<script src="{% static 'posts/js/post.js' %}"></script>
 	{% endif %}
 {% endblock %}

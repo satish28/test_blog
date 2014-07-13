@@ -9,6 +9,11 @@ $(function() {
 		$('.like-btn').attr('disabled', 'disabled');
 	}
 	
+	// If the user is not logged in
+	if (!user) {
+		$('.like-btn').attr('disabled', 'disabled');
+	}
+	
 	$('.like-btn').click(function() {
 		increment_likes(post_id);
 	});
