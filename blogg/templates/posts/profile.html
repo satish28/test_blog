@@ -13,7 +13,7 @@
 		{% for post in posts %}
 			<h4><a href="{% url 'post' post.id %}">{{ post.post_title }}</a></h4> 
 			{% if is_user_author %}
-			    <a href="">edit</a> <a href="{% url 'delete' post.id %}">delete</a>
+			    <a href="{% url 'edit_post' post.id %}">edit</a> <a href="{% url 'delete' post.id %}">delete</a>
 			{% endif %}
 		{% endfor %}
 	{% else %}

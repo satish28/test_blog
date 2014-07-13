@@ -13,15 +13,15 @@
 		</div>
 		<hr/>
 	{% endfor %}
+	<center>
         {% if posts_pages.has_previous %}
             <a href="?page={{ posts_pages.previous_page_number }}">previous</a>
         {% endif %}
-
         <span class="current">
             Page {{ posts_pages.number }} of {{ posts_pages.paginator.num_pages }}
         </span>
-
         {% if posts_pages.has_next %}
             <a href="?page={{ posts_pages.next_page_number }}">next</a>
         {% endif %}
+	<center>
 {% endblock %}

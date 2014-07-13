@@ -4,7 +4,8 @@
 
 {% block body_block %}
 		<h2> Post a Blog </h2>
-		<form id="post_form" method="post" action="{% url 'add_post' %}">
+		{% if posts %}
+		<form id="post_form" method="post" action="{% url 'edit_post' posts.id %}">
 		<table>
 			<td>
 			{% csrf_token %}
@@ -18,6 +19,7 @@
 			{% endfor %}
 			<tr><input type="submit" value="Create Blog" /></tr>
 			</td>
+		{% endif %}
 		</table>
 		</form>
 {% endblock %}
