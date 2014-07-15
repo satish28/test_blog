@@ -3,9 +3,12 @@
 {% block title %} New Post {% endblock %}
 
 {% block body_block %}
-		<h2> Post a Blog </h2>
-		{% if posts %}
-		<form id="post_form" method="post" action="{% url 'edit_post' posts.id %}">
+		<h2> Post a Blog | add </h2>
+		{% if post %}			
+			<form id="post_form" method="post" action="{% url 'edit_post' post.id %}">
+		{% else %}
+			<form id="post_form" method="post" action="{% url 'add_post' %}">
+		{% endif %}
 		<table>
 			<td>
 			{% csrf_token %}
@@ -19,7 +22,6 @@
 			{% endfor %}
 			<tr><input type="submit" value="Create Blog" /></tr>
 			</td>
-		{% endif %}
 		</table>
 		</form>
 {% endblock %}
