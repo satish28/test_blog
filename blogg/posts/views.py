@@ -75,7 +75,7 @@ def add_post(request):
         form = UserPostForm()
         return render_to_response('posts/craft_post.html', {'form':form}, context)
 
-def profiles(request, author):
+def profile(request, author):
     context = RequestContext(request)
     context_dict = {}
     context_dict['name'] = author
@@ -100,10 +100,10 @@ def profiles(request, author):
     return render_to_response('posts/profile.html', context_dict, context)
         
 @login_required
-def delete(request, post_id):
+def delete_post(request, post_id):
     user = request.user
     author = user.username
-    delete_post(post_id)
+    hard_delete_post(post_id)
     return HttpResponseRedirect(reverse('profile', kwargs={'author':author}))
 
 @login_required
@@ -119,8 +119,8 @@ def edit_post(request, post_id):
         edit_form.save()	
 	return HttpResponseRedirect(reverse('post', kwargs={'post_id':post_id}))
     else:
-	context_dict['form'] = UserPostForm(instance=edit_post)
-        return render_to_response('posts/craft_post.html', context_dict, context)
+	    context_dict['form'] = UserPostForm(instance=edit_post)
+    return render_to_response('posts/craft_post.html', context_dict, context)
 
 @login_required
 def post_like(request):

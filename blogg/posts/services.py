@@ -60,9 +60,9 @@ def shorten_content(post_content):
         content += '...'
     return content
 
-def delete_post(post_id):
+def hard_delete_post(post_id):
     """
-    Delete Post.
+    Delete a Post.
     """
     UserPosts.objects.filter(id=post_id).delete() 	
     
