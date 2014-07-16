@@ -110,4 +110,3 @@ class PostWithImage():
         
     def __str__(self):
         return str(self.post) + self.gravatar_url + self.size
-        

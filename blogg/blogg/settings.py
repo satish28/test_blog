@@ -63,7 +63,7 @@ ROOT_URLCONF = 'blogg.urls'
 
 WSGI_APPLICATION = 'blogg.wsgi.application'
 
-
+SESSION_ENGINE = "django.contrib.sessions.backends.signed_cookies"
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 DATABASES = {
@@ -98,3 +98,5 @@ STATIC_URL = '/static/'
 
 # Login url
 LOGIN_URL = '/login'
+
+SESSION_COOKIE_AGE = 2700

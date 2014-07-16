@@ -3,13 +3,17 @@
 {% block title %} New Post {% endblock %}
 
 {% block body_block %}
-		<h2> Post a Blog </h2>
-		<form id="post_form" method="post" action="{% url 'add_post' %}">
+		<h2> Post a Blog | add </h2>
+		{% if post %}			
+			<form id="post_form" method="post" action="{% url 'edit_post' post.id %}">
+		{% else %}
+			<form id="post_form" method="post" action="{% url 'add_post' %}">
+		{% endif %}
 		<table>
 			<td>
 			{% csrf_token %}
 			{% for hidden in form.hidden_fields %}
-				{{hidden}}
+				{{ hidden }}
 			{% endfor %}
 			{% for field in form.visible_fields %}
 				{{ field.errors }}

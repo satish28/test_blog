@@ -8,4 +8,5 @@ urlpatterns = patterns('',
     url(r'^profile/(?P<author>\w+)/$', views.profiles, name='profile'),
     url(r'^delete_post/(?P<post_id>\d+)$', views.delete, name='delete'),
     url(r'^post/like/$', views.post_like, name='post_likes'),
+    url(r'^edit_post/(?P<post_id>\d+)$', views.edit_post, name='edit_post'),
     )

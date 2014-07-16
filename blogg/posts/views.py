@@ -21,7 +21,7 @@ def home(request):
     for post in posts:
         post_with_image = PostWithImage(post, post.username.email, image_size)
         posts_with_images.append(post_with_image)
-    pages = Paginator(posts_with_images,5)
+    pages = Paginator(posts_with_images, 5)
     page = request.GET.get('page')
     try:
 	    posts_pages = pages.page(page)
@@ -65,15 +65,15 @@ def add_post(request):
     if request.method == 'POST':
         form = UserPostForm(request.POST)
         if form.is_valid():
-            p1 = form.save(commit=False)
-            p1.username_id = current_user.id
-            p1.save()							
+            post_save = form.save(commit=False)
+            post_save.username_id = current_user.id
+            post_save.save()							
             return HttpResponseRedirect(reverse('home'))
         else:
             print form.errors
     else:
         form = UserPostForm()
-        return render_to_response('posts/add_post.html', {'form':form}, context)
+        return render_to_response('posts/craft_post.html', {'form':form}, context)
 
 def profiles(request, author):
     context = RequestContext(request)
@@ -105,6 +105,22 @@ def delete(request, post_id):
     author = user.username
     delete_post(post_id)
     return HttpResponseRedirect(reverse('profile', kwargs={'author':author}))
+
+@login_required
+def edit_post(request, post_id):
+    context = RequestContext(request)
+    edit_form = UserPostForm(request.POST)
+    edit_post = get_post(post_id)
+    context_dict = {}
+    context_dict['post'] = edit_post
+    context_dict['form'] = edit_form
+    if request.POST:
+        edit_form=UserPostForm(request.POST, instance=edit_post)
+        edit_form.save()	
+	return HttpResponseRedirect(reverse('post', kwargs={'post_id':post_id}))
+    else:
+	context_dict['form'] = UserPostForm(instance=edit_post)
+        return render_to_response('posts/craft_post.html', context_dict, context)
 
 @login_required
 def post_like(request):
