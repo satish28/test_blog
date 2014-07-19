@@ -3,6 +3,13 @@
 {% block title %} Post {% endblock %}
 
 {% block body_block %}
+	<script>
+		var post_id = "{{ post.id }}";
+		var is_post_liked = "{{ is_post_liked }}";
+		var user = "{{ user.username }}"
+		var post_author = "{{ post.username }}"
+	</script>
+	<script src="{% static 'posts/js/post.js' %}"></script>
     {% if not post.is_deleted %}
 	    <h4>{{ post.post_title }}</h4>
 	    {{ post.post_content }} <br/>
@@ -13,12 +20,5 @@
 		<div class="like">
 			<button class="btn btn-mini like-btn" type="button">Like</button>
 		</div>
-		<script>
-			var post_id = "{{ post.id }}";
-			var is_post_liked = "{{ is_post_liked }}";
-			var user = "{{ user.username }}"
-			var post_author = "{{ post.username }}"
-		</script>
-		<script src="{% static 'posts/js/post.js' %}"></script>
 	{% endif %}
 {% endblock %}
