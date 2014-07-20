@@ -90,6 +90,7 @@ def update_likes(user, post_id):
     """
     post = get_post(post_id)
     if post and not is_post_liked(user, post):
+        # Updating user like also
         update_user_like(user, post)
         post.likes += 1
         likes = post.likes

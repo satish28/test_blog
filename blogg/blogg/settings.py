@@ -145,6 +145,16 @@ LOGGING = {
         'login': {
             'handlers': ['console'],
             'level': 'DEBUG',
+        }, 
+        'posts': {
+            'handlers': ['console'],
+            'level': 'DEBUG'
         }
     }
 }
+
+# making 'request' available in the templates. ex: request.get_full_path
+from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS
+TEMPLATE_CONTEXT_PROCESSORS += (
+    'django.core.context_processors.request',
+)
