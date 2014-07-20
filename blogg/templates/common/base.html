@@ -3,7 +3,7 @@
 <html>
 	<head>
 		<link href="{% static 'common/css/bootstrap.min.css' %}" rel="stylesheet">
-		<link href="{% static 'posts/css/base.css' %}" rel="stylesheet">
+		<link href="{% static 'common/css/base.css' %}" rel="stylesheet">
 		<link href="{% static 'posts/css/userprofile.css' %}" rel="stylesheet">
 		<link href="{% static 'posts/css/home.css' %}" rel="stylesheet">
 		<link href="{% static 'posts/css/post.css' %}" rel="stylesheet">
@@ -14,7 +14,8 @@
 		<div class="header navbar">
 			<h2><a href="{% url 'home' %}">Blogg</a></h2>
 		</div>
-		<!-- new code -->
+		<!-- wrap container -->
+		<div id="wrap">
 		<nav class="navbar navbar-default" role="navigation">
 		  <div class="container-fluid">
 		    <!-- Brand and toggle get grouped for better mobile display -->
@@ -62,7 +63,7 @@
 		      </ul>
 		      <form class="navbar-form navbar-left" role="search">
 		        <div class="form-group">
-		          <input type="text" class="form-control" placeholder="Search">
+		          <input type="text" class="form-control" placeholder="Search posts, authors">
 		        </div>
 		        <button type="submit" class="btn btn-default btn-primary">Submit</button>
 		      </form>
@@ -90,6 +91,10 @@
 			<div class="content">
 			    {% block body_block %}{% endblock %}
 		    </div>
+		</div>
+	</div> <!-- wrap close -->
+		<div class="footer navbar">
+			All rights reserved. blogg&trade;
 		</div>
 	<script src="{% static 'common/js/bootstrap.min.js' %}"></script>
 	<script>

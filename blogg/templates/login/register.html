@@ -1,13 +1,13 @@
-<!DOCTYPE html>
+{% extends 'common/base.html' %}
+
 {% load static %}
+		
 {% load widget_tweaks %}
-<html>
-	<head>
-		<link href="{% static 'common/css/bootstrap.min.css' %}" rel="stylesheet">
+
+{% block title %} Register {% endblock %}
+
+{% block body_block %}
 		<link href="{% static 'login/css/register.css' %}" rel="stylesheet">
-		<title>Register | blogg</title>
-	</head>
-	<body>
 		<div class="container">
 		<div id="msg" style="text-align:center;color:red;">{{ msg }}</div>
 		<form class="form-signin" method="post" action="{% url 'register' %}">
@@ -19,11 +19,8 @@
 			{{ form.username|add_class:"form-control"|attr:"placeholder:Username"|attr:"required" }}
 			{{ form.password|add_class:"form-control"|attr:"placeholder:Password"|attr:"required" }}
 			
-			<input class="btn btn-primary" type="submit" value="Register" >
-			<a class="btn btn-primary" href="{% url 'login' %}">Login</a>
+			<input class="btn btn-primary btn-style" type="submit" value="Register" >
+			<a class="btn btn-primary btn-style" href="{% url 'login' %}">Login</a>
 		</form>
 	    </div>
-		<script src="{% static 'common/js/jquery-2.1.1.js' %}"></script>
-		<script src="{% static 'common/js/bootstrap.min.js' %}"></script>
-	</body>
-</html>
+{% endblock %}

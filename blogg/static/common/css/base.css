@@ -1,3 +1,8 @@
+html,
+body {
+	height: 100%;
+}
+
 body {
   padding: 0px;
   margin: 0px;
@@ -51,4 +56,23 @@ body {
 
 .user-action a {
 	padding-bottom: 10px;
+}
+
+/* styling for footer */
+
+.footer {
+	text-align: center;
+	background-color: black;
+	color: white;
+	border-radius: 0px;
+	margin-bottom: 0px;
+}
+
+#wrap {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    /* Negative indent footer by it's height */
+    margin: 0 auto -60px;
+	margin-bottom: 0px;
 }
