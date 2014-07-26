@@ -9,3 +9,22 @@
 .pager {
 	margin-bottom: 70px;
 }
+
+/* styling for user-pane */
+
+.right-nav {
+	float: right;
+	width: 25%;
+	margin-top: 30px;
+}
+
+.content {
+	float: left;
+	width: 65%;
+}
+
+/* styling for home */
+
+.info {
+	text-align: right;
+}

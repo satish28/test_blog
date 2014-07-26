@@ -10,16 +10,8 @@ body {
   background-color: #eee;
 }
 
-.header{
-	text-align: center;
-	background-color: black;
-	color: white;
+.navbar {
 	border-radius: 0px;
-	margin-bottom: 0px;
-}
-
-.header a{
-	text-decoration: none;
 }
 
 .user-info {
@@ -30,32 +22,8 @@ body {
 	color: white;
 }
 
-/* styling for home */
-
-.info {
-	text-align: right;
-}
-
-.content {
-	float: left;
-	width: 75%;
-}
-
-/* styling for user-pane */
-
-.user-pane {
-	float: right;
-	width: 25%;
-	height: 100%;
-}
-
-.user-action {
-	margin-top: 45%;
-	margin-left: 50%;
-}
-
-.user-action a {
-	padding-bottom: 10px;
+.search {
+	margin-left: 15%;
 }
 
 /* styling for footer */

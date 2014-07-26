@@ -1,9 +1,13 @@
 {% extends 'common/base.html' %}
 
+{% load static %}
+
 {% block title %} Home {% endblock %}
 
 {% block body_block %}
-    <h2>Popular Posts</h2>
+	<link href="{% static 'posts/css/home.css' %}" rel="stylesheet">
+	<div class="content">
+    <h2>Latest Posts</h2>
 	<hr/>
 	{% for post_image in posts_pages %}
 		<h4><a href="{% url 'post' post_image.post.id %}">{{ post_image.post.post_title }}</a></h4>
@@ -24,4 +28,19 @@
             <li><a href="?page={{ posts_pages.next_page_number }}">next</a></li>
         {% endif %}
 	</ul>
+	</div>
+	<div class="right-nav">
+		<h4>Popular posts</h4>
+		<ul class="list-group">
+		  <a href="#" class="list-group-item">Checking logging</a>
+		  <a href="#" class="list-group-item">Asus</a>
+		  <a href="#" class="list-group-item">I am a new user</a>
+		</ul>
+		<h4>Popular Authors</h4>
+		<ul class="list-group">
+		  <li  class="list-group-item"><span class="badge">5</span><a href="#">Steve</a></li>
+		  <li class="list-group-item"><span class="badge">4</span><a href="#">Satish</a></li>
+		  <li class="list-group-item"><span class="badge">14</span><a href="#">Dinesh</a></li>
+		</ul>
+	</div>
 {% endblock %}

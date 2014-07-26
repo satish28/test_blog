@@ -1,3 +1,7 @@
-.like {
+.likes, .visits {
+	margin-left: 15px;
+}
+
+.info, .like {
 	text-align: right;
 }

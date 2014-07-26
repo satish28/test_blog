@@ -1,0 +1,15 @@
+.title-field, .content-field {
+	margin: 20px;
+	width: 230%;
+}
+
+.content {
+	position: absolute;
+	left: 10%;
+}
+
+.submit {
+	position: relative;
+	margin-top: 20px;
+	left: 100%;
+}

@@ -1,27 +1,28 @@
 {% extends 'common/base.html' %}
 
+{% load static %}
+
+{% load widget_tweaks %}
+
 {% block title %} New Post {% endblock %}
 
 {% block body_block %}
+		<div class="content">
+		<link href="{% static 'posts/css/craft_post.css' %}" rel="stylesheet">
 		<h2> Post a Blog | add </h2>
 		{% if post %}			
 			<form id="post_form" method="post" action="{% url 'edit_post' post.id %}">
 		{% else %}
 			<form id="post_form" method="post" action="{% url 'add_post' %}">
 		{% endif %}
-		<table>
-			<td>
 			{% csrf_token %}
 			{% for hidden in form.hidden_fields %}
 				{{ hidden }}
 			{% endfor %}
-			{% for field in form.visible_fields %}
-				{{ field.errors }}
-				<tr>{{ field.help_text }}</tr>
-				{{ field }}
-			{% endfor %}
-			<tr><input type="submit" value="Create Blog" /></tr>
-			</td>
-		</table>
+				{{ form.visible_fields.errors }}
+				{{ form.post_title|attr:"placeholder:Post Title"|add_class:"form-control title-field"|attr:"autofocus" }}
+				{{ form.post_content|attr:"placeholder:Post Content"|add_class:"form-control content-field" }}
+			<input class="btn btn-primary submit" type="submit" value="Create Post" />
 		</form>
+	</div>
 {% endblock %}
