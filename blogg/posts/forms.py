@@ -2,7 +2,7 @@ from django import forms
 from posts.models import UserPosts
 
 class UserPostForm(forms.ModelForm):
-	post_title = forms.CharField(max_length=30, help_text="Please enter the title")
+	post_title = forms.CharField(max_length=100, help_text="Please enter the title")
 	post_content = forms.CharField(widget=forms.Textarea)
 
 	class Meta:

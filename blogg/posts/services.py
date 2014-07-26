@@ -1,6 +1,7 @@
 import hashlib
 import urllib
-from models import UserPosts, UserLikes
+from django.conf import settings
+from models import UserPosts, UserLikes, UserPostCount
 
 def get_home_posts():
     """
@@ -96,6 +97,44 @@ def update_likes(user, post_id):
         likes = post.likes
         post.save()
     return likes
+    
+def get_user_post_count(user):
+    """
+    Get the user post count.
+    """
+    try:
+        user_post_count = UserPostCount.objects.get(username=user)
+    except UserPostCount.DoesNotExist:
+        return None
+    return user_post_count
+    
+def update_post_count(user):
+    """
+    Update post count of the user.
+    """
+    user_post_count = get_user_post_count(user)
+    if user_post_count:
+        user_post_count.post_count += 1
+        user_post_count.save()
+    else:
+        user_post_count = UserPostCount(username=user, post_count=1)
+        user_post_count.save()
+        
+def get_popular_posts():
+    """
+    Get popular_posts. (Based on no. of visits)
+    """
+    popular_post_count = settings.POPULAR_POST_COUNT
+    popular_posts = UserPosts.objects.all().order_by('-visits')[:popular_post_count]
+    return popular_posts
+
+def get_popular_authors():
+    """
+    Get popular authors. (Based on no. of posts)
+    """
+    popular_author_count = settings.POPULAR_AUTHOR_COUNT
+    popular_authors = UserPostCount.objects.all().order_by('-post_count')[:popular_author_count]
+    return popular_authors
     
 class PostWithImage():
     """

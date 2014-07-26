@@ -32,15 +32,15 @@
 	<div class="right-nav">
 		<h4>Popular posts</h4>
 		<ul class="list-group">
-		  <a href="#" class="list-group-item">Checking logging</a>
-		  <a href="#" class="list-group-item">Asus</a>
-		  <a href="#" class="list-group-item">I am a new user</a>
+		  {% for post in popular_posts %}
+		  	<a href="{% url 'post' post.id %}" class="list-group-item">{{ post.post_title }}</a>
+		  {% endfor %}
 		</ul>
 		<h4>Popular Authors</h4>
 		<ul class="list-group">
-		  <li  class="list-group-item"><span class="badge">5</span><a href="#">Steve</a></li>
-		  <li class="list-group-item"><span class="badge">4</span><a href="#">Satish</a></li>
-		  <li class="list-group-item"><span class="badge">14</span><a href="#">Dinesh</a></li>
+		  {% for author in popular_authors %}
+		  	<li  class="list-group-item"><span class="badge">{{ author.post_count }}</span><a href="{% url 'profile' author.username %}">{{ author.username }}</a></li>
+		  {% endfor %}
 		</ul>
 	</div>
 {% endblock %}

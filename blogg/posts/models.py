@@ -7,7 +7,7 @@ class UserPosts(models.Model):
     User posts model
     """
     username = models.ForeignKey(User)
-    post_title = models.CharField(max_length=30)	
+    post_title = models.CharField(max_length=100)	
     post_content = models.TextField()	
     likes = models.IntegerField(default=0)
     visits = models.IntegerField(default=0)
@@ -23,3 +23,10 @@ class UserLikes(models.Model):
     
     class Meta:
         unique_together = (('username', 'post'),)
+
+class UserPostCount(models.Model):
+    """
+    User post count
+    """
+    username = models.ForeignKey(User, unique=True)
+    post_count = models.IntegerField(default=0)

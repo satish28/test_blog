@@ -36,6 +36,14 @@ def home(request):
         posts_pages = pages.page(Paginator.num_pages)
     context_dict['posts_images'] = posts_with_images
     context_dict['posts_pages'] = posts_pages
+    # Getting popular authors
+    popular_authors = get_popular_authors()
+    logger.debug('popular authors count[%s]', len(popular_authors))
+    context_dict['popular_authors'] = popular_authors
+    # Getting popular posts
+    popular_posts = get_popular_posts()
+    logger.debug('popular posts count[%s]', len(popular_posts))
+    context_dict['popular_posts'] = popular_posts
     return render_to_response('posts/home.html', context_dict, context)
     
 def each_post(request, post_id):
@@ -73,7 +81,8 @@ def add_post(request):
             post_save = form.save(commit=False)
             post_save.username_id = current_user.id
             post_save.save()
-            logger.debug('Post [%s] added', post_save.id)							
+            update_post_count(current_user)
+            logger.debug('Post [%s] added by [%s]', post_save.id, current_user)							
             return HttpResponseRedirect(reverse('home'))
         else:
             logger.debug('Post cannot be added')
