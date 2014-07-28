@@ -7,7 +7,7 @@ def get_home_posts():
     """
     Get posts to be displayed in the home page.
     """
-    posts = UserPosts.objects.all()
+    posts = UserPosts.objects.all().order_by('-created_timestamp')
     return posts
 
 def get_post(post_id):
