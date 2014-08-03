@@ -1,7 +1,7 @@
 import hashlib
 import urllib
 from django.conf import settings
-from models import UserPosts, UserLikes, UserPostCount
+from models import UserPosts, UserPostLikes, UserPostCount
 
 def get_home_posts():
     """
@@ -20,11 +20,11 @@ def get_post(post_id):
         post = None
     return post
     
-def get_user_posts(user_id):
+def get_user_posts(user):
     """
-    Get posts by user user_id.
+    Get all posts by user user_id.
     """
-    posts = UserPosts.objects.filter(username_id=user_id)
+    posts = UserPosts.objects.filter(username=user)
     return posts
     
 def generate_gravatar_url(email, size):
@@ -46,8 +46,9 @@ def increment_visit_count(post_id):
     read. So the visit will be reflected the next time the post is opened.
     """
     post = get_post(post_id)
-    post.visits += 1
-    post.save()
+    if post:
+        post.visits += 1
+        post.save()
     
 def shorten_content(post_content):
     """
@@ -67,12 +68,13 @@ def hard_delete_post(post_id):
     """
     UserPosts.objects.filter(id=post_id).delete() 	
     
-def update_user_like(user, post):
+def update_user_post_likes(user, post):
     """
-    Update user like in UserLikes table.
+    Update user likes in UserPostLikes table. Add an entry that user liked a post.
+    A row in this table means the user liked corresponding post in the row.
     """
-    user_like = UserLikes(username=user, post=post)
-    user_like.save()
+    user_likes = UserPostLikes(username=user, post=post)
+    user_likes.save()
     
 def is_post_liked(user, post):
     """
@@ -80,8 +82,8 @@ def is_post_liked(user, post):
     if yes, else return False.
     """
     try:
-        UserLikes.objects.get(username=user, post=post)
-    except UserLikes.DoesNotExist:
+        UserPostLikes.objects.get(username=user, post=post)
+    except UserPostLikes.DoesNotExist:
         return False
     return True
     
@@ -90,9 +92,10 @@ def update_likes(user, post_id):
     Update likes for post and return the updated like count.
     """
     post = get_post(post_id)
+    likes = 0
     if post and not is_post_liked(user, post):
         # Updating user like also
-        update_user_like(user, post)
+        update_user_post_likes(user, post)
         post.likes += 1
         likes = post.likes
         post.save()
@@ -100,7 +103,7 @@ def update_likes(user, post_id):
     
 def get_user_post_count(user):
     """
-    Get the user post count.
+    Get the user post count if it exists else return None.
     """
     try:
         user_post_count = UserPostCount.objects.get(username=user)
