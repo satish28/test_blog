@@ -14,7 +14,10 @@ class UserPosts(models.Model):
     created_timestamp = models.DateTimeField(auto_now_add=True)
     is_deleted = models.BooleanField(default=False)
     
-class UserLikes(models.Model):
+    def __unicode__(self):
+        return self.username.username + '-' + self.post_title
+    
+class UserPostLikes(models.Model):
     """
     User likes model
     """
@@ -23,6 +26,9 @@ class UserLikes(models.Model):
     
     class Meta:
         unique_together = (('username', 'post'),)
+        
+    def __unicode__(self):
+        return self.username.username + '-' + self.post.post_title
 
 class UserPostCount(models.Model):
     """
@@ -30,3 +36,6 @@ class UserPostCount(models.Model):
     """
     username = models.ForeignKey(User, unique=True)
     post_count = models.IntegerField(default=0)
+    
+    def __unicode__(self):
+        return self.username.username + '-' + str(self.post_count)
