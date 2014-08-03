@@ -146,6 +146,6 @@ def post_like(request):
     post_id = None
     if request.method == 'GET':
         post_id = request.GET['post_id']
-        logger.info('post [%s] liked')
+        logger.info('post [%s] liked by [%s]', post_id, current_user)
         likes = update_likes(current_user, post_id)
     return HttpResponse(likes)
