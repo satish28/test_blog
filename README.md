@@ -8,13 +8,13 @@ This is a simple blog which includes the following features.
 
 Usage: 
 
-Install additional modules mentioned in requirements.txt. It can be done manually or by using pip.
+1) Install additional modules mentioned in requirements.txt. It can be done manually or by using pip.
 
-Edit settings.py file to your own database credentials.
+2) Edit settings.py file to your own database credentials.
 
-Please have look into django documentation if facing troubles in creating tables. 
+3) Please have look into django documentation if facing troubles in creating tables. 
 
-Run python manage.py runserver to run the blog locally. 
+4) Run python manage.py runserver to run the blog locally. 
 
 
 Please make sure all the tests are passing before making a pull request.
@@ -26,9 +26,11 @@ Pull request will be accepted, only if tests are also written for any feature ad
 Any additional test cases are also welcome.
 
 
-GNU GENERAL PUBLIC LICENSE
+
+<h2>GNU GENERAL PUBLIC LICENSE</h2>
+
 Version 3, 29 June 2007
 
-Copyright © 2007 Free Software Foundation, Inc. <http://fsf.org/>
+<i>Copyright © 2007 Free Software Foundation, Inc. <http://fsf.org/><i>
 
 Everyone is permitted to copy and distribute verbatim copies of this license document, but changing it is not allowed.
