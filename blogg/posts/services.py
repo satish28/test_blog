@@ -31,11 +31,15 @@ def generate_gravatar_url(email, size):
     """
     Generate gravatar url for getting user image.
     """
-    default_image_url = ''
+    # This is the d parameter for gravatar.
+    # Setting it to 404 so that we can have
+    # our own default image. Check gravatar.js
+    # for implementation details.
+    d = '404'
     hash_obj = hashlib.md5(email)
     email_hash = hash_obj.hexdigest()
     gravatar_url = "http://www.gravatar.com/avatar/" + hashlib.md5(email.lower()).hexdigest() + "?"
-    gravatar_url += urllib.urlencode({'d':default_image_url, 's':str(size)})
+    gravatar_url += urllib.urlencode({'d':d, 's':str(size)})
     return gravatar_url
     
 def increment_visit_count(post_id):
