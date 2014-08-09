@@ -143,3 +143,9 @@ class PostsTest(TestCase):
         popular_authors = get_popular_authors()
         self.assertIsNotNone(popular_authors)
         
+    def test_hard_delete_post(self):
+        count = get_user_post_count(self.user).post_count
+        hard_delete_post(self.post.id, self.user)
+        count_after_delete = get_user_post_count(self.user).post_count
+        self.assertEqual(count - 1, count_after_delete)
+        

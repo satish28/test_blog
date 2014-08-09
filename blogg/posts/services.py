@@ -66,11 +66,15 @@ def shorten_content(post_content):
         content += '...'
     return content
 
-def hard_delete_post(post_id):
+def hard_delete_post(post_id, user):
     """
     Delete a Post.
     """
-    UserPosts.objects.filter(id=post_id).delete() 	
+    UserPosts.objects.filter(id=post_id).delete()
+    # Updating the post count.
+    user_post_count = UserPostCount.objects.get(username=user)
+    user_post_count.post_count -= 1
+    user_post_count.save()
     
 def update_user_post_likes(user, post):
     """

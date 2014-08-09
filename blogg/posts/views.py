@@ -86,9 +86,8 @@ def add_post(request):
             return HttpResponseRedirect(reverse('home'))
         else:
             logger.debug('Post cannot be added')
-    else:
-        form = UserPostForm()
-        return render_to_response('posts/craft_post.html', {'form':form}, context)
+    form = UserPostForm()
+    return render_to_response('posts/craft_post.html', {'form':form}, context)
 
 def profile(request, author):
     context = RequestContext(request)
@@ -119,7 +118,7 @@ def profile(request, author):
 def delete_post(request, post_id):
     current_user = request.user
     author = current_user.username
-    hard_delete_post(post_id)
+    hard_delete_post(post_id, current_user)
     logger.debug('Post [%s] by author [%s] deleted permanently', post_id, author)
     return HttpResponseRedirect(reverse('profile', kwargs={'author':author}))
 
