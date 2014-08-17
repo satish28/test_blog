@@ -33,6 +33,19 @@ Pull request will be accepted, only if tests are also written for any feature ad
 
 Any additional test cases are also welcome.
 
+<h2>Database settings</h2>
+After doing any development and before you commit, remove the database settings from settings.py.
+You don't want your db username and password in git history. 
+
+It is cumbersome to add and remove settings everytime you commit. So we wrote a shell script to automate this process.
+db_settings.sh. Copy this script into /virtualenv/bin. Put your database settings in it. 
+To add db settings to settings.py, go to the directory where settings.py file is and run
+
+    $ db_settings.sh settings.py add
+    $ db_settings.sh settings.py del
+ 
+add - For adding settings and del - For removing settings.
+
 <h2>Credits</h2>
 1. We have used <a href="http://getbootstrap.com/">bootstrap</a> extensively for website design. 
 Have a look at it.
