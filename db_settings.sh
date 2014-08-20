@@ -10,7 +10,7 @@
 
 # Database settings
 # Specify your database details below.
-NAME="mydb"
+NAME=""
 USER=""
 PASSWORD=""
 
