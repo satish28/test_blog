@@ -86,7 +86,8 @@ def add_post(request):
             return HttpResponseRedirect(reverse('home'))
         else:
             logger.debug('Post cannot be added')
-    form = UserPostForm()
+    else:
+        form = UserPostForm()
     return render_to_response('posts/craft_post.html', {'form':form}, context)
 
 def profile(request, author):

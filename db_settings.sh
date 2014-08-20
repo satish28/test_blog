@@ -10,9 +10,9 @@
 
 # Database settings
 # Specify your database details below.
-NAME=""
-USER=""
-PASSWORD=""
+NAME="mydb"
+USER="satish"
+PASSWORD="satish28"
 
 if [ $# -ne 2 ]; then
 	echo "Invalid number of arguments"

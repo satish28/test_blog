@@ -19,7 +19,7 @@
 			{% for hidden in form.hidden_fields %}
 				{{ hidden }}
 			{% endfor %}
-				{{ form.visible_fields.errors }}
+                                {{form.errors}}
 				{{ form.post_title|attr:"placeholder:Post Title"|add_class:"form-control title-field"|attr:"autofocus" }}
 				{{ form.post_content|attr:"placeholder:Post Content"|add_class:"form-control content-field" }}
 			<input class="btn btn-primary submit" type="submit" value="Create Post" />
