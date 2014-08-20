@@ -8,11 +8,13 @@ class UserPostForm(forms.ModelForm):
 	class Meta:
 		model = UserPosts
 		fields=('post_title','post_content')
+
 	def clean_post_title(self):
 		cleaned_post_title = self.cleaned_data['post_title']
 		if len(cleaned_post_title.strip())!=0:
 			return cleaned_post_title
                 raise forms.ValidationError("Please give a title for your blog")
+
 	def clean_post_content(self):
 		cleaned_post_content = self.cleaned_data['post_content']
 		if len(cleaned_post_content.strip())!=0:
